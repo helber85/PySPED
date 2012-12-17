@@ -1,0 +1,6 @@
+setuptools
+lxml
+suds
+PyOpenSSL==0.12
+PyXMLSec
+Geraldo
