@@ -3,7 +3,6 @@
 from datetime import datetime
 from os.path import abspath, dirname
 from pysped.xml_sped.certificado import Certificado
-import assinador
 
 FILE_DIR = abspath(dirname(__file__))
 
