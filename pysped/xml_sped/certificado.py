@@ -170,6 +170,7 @@ class Certificado(object):
         xmltree = etree.fromstring(xml.encode('utf-8'))
         doctype = None
         
+        # Ver: http://www.aleksey.com/xmlsec/faq.html Item: 3.2
         for c in xmltree.getchildren():
             if u'infNFe' in c.tag:
                 doctype = u'<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>'
