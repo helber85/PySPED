@@ -38,11 +38,7 @@ class HttpsCertTransport(HttpTransport):
         """
         tm = self.options.timeout
         url = urllib2.build_opener(HTTPSCertAuthHandler(self.key, self.cert))  
-        if self.urllib2.ver() < 2.6:
-            socket.setdefaulttimeout(tm)
-            connection = url.open(urllib2request)
-        else:
-            connection = url.open(urllib2request, timeout=tm)
+        connection = url.open(request, timeout=tm)
         
         return connection
 
