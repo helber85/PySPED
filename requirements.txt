@@ -2,5 +2,5 @@ setuptools
 lxml
 suds
 PyOpenSSL==0.12
-PyXMLSec
+https://github.com/aricaldeira/pyxmlsec/archive/master.zip
 Geraldo
