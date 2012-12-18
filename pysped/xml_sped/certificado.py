@@ -181,7 +181,7 @@ class Certificado(object):
                 doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
                 break
             elif u'infCte' in c.tag:
-                doctype = '<!DOCTYPE CTe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                doctype = u'<!DOCTYPE CTe [<!ATTLIST infCte Id ID #IMPLIED>]>'
                 break
         if not doctype:
             raise ValueError('Tipo de arquivo desconhecido para assinatura/validacao')
@@ -223,7 +223,7 @@ class Certificado(object):
                 doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
                 break
             elif u'infCte' in c.tag:
-                doctype = '<!DOCTYPE CTe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                doctype = u'<!DOCTYPE CTe [<!ATTLIST infCte Id ID #IMPLIED>]>'
                 break
         if not doctype:
             raise ValueError('Tipo de arquivo desconhecido para assinatura/validacao')
