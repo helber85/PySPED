@@ -28,7 +28,7 @@ class HttpsCertTransport(HttpTransport):
         self.key = key
         self.cert = cert
 
-    def open(self, request):
+    def u2open(self, request):
         """
         Open a connection.
         @param request: A urllib2 request.
