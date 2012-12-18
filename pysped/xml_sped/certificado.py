@@ -5,6 +5,7 @@ import tempfile
 import libxml2
 import xmlsec
 import os
+from lxml import etree
 from datetime import datetime
 from time import mktime
 from OpenSSL import crypto
@@ -166,13 +167,23 @@ class Certificado(object):
         # Determina o tipo de arquivo que vai ser assinado, procurando
         # pela tag correspondente
         #
-        if u'infNFe' in xml:
-            doctype = u'<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>'
-        elif u'infCanc' in xml:
-            doctype = u'<!DOCTYPE cancNFe [<!ATTLIST infCanc Id ID #IMPLIED>]>'
-        elif u'infInut' in xml:
-            doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
-        else:
+        xmltree = etree.fromstring(xml.encode('utf-8'))
+        doctype = None
+        
+        for c in xmltree.getchildren():
+            if u'infNFe' in c.tag:
+                doctype = u'<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>'
+                break
+            elif u'infCanc' in c.tag:
+                doctype = u'<!DOCTYPE cancNFe [<!ATTLIST infCanc Id ID #IMPLIED>]>'
+                break
+            elif u'infInut' in c.tag:
+                doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                break
+            elif u'infCte' in c.tag:
+                doctype = '<!DOCTYPE CTe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                break
+        if not doctype:
             raise ValueError('Tipo de arquivo desconhecido para assinatura/validacao')
 
         #
@@ -198,13 +209,23 @@ class Certificado(object):
         # Determina o tipo de arquivo que vai ser assinado, procurando
         # pela tag correspondente
         #
-        if u'infNFe' in xml:
-            doctype = u'<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>'
-        elif u'infCanc' in xml:
-            doctype = u'<!DOCTYPE cancNFe [<!ATTLIST infCanc Id ID #IMPLIED>]>'
-        elif u'infInut' in xml:
-            doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
-        else:
+        xmltree = etree.fromstring(xml.encode('utf-8'))
+        doctype = None
+        
+        for c in xmltree.getchildren():
+            if u'infNFe' in c.tag:
+                doctype = u'<!DOCTYPE NFe [<!ATTLIST infNFe Id ID #IMPLIED>]>'
+                break
+            elif u'infCanc' in c.tag:
+                doctype = u'<!DOCTYPE cancNFe [<!ATTLIST infCanc Id ID #IMPLIED>]>'
+                break
+            elif u'infInut' in c.tag:
+                doctype = u'<!DOCTYPE inutNFe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                break
+            elif u'infCte' in c.tag:
+                doctype = '<!DOCTYPE CTe [<!ATTLIST infInut Id ID #IMPLIED>]>'
+                break
+        if not doctype:
             raise ValueError('Tipo de arquivo desconhecido para assinatura/validacao')
 
         #
