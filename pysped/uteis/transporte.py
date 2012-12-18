@@ -55,8 +55,9 @@ if __name__ == '__main__':
     key_path = os.environ.get('SPED_KEY_PATH', '/path/to/YOUR_KEY_AND_CERT.pem')
     key_password = os.environ.get('SPED_KEY_PASSWORD', 'DEADBEEF')
     cert_path = os.environ.get('SPED_CERT_PATH', key_path)
+    test_url = 'https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx'
 
-    c = Client('https://YOUR_URL_HERE',
+    c = Client(test_url,
         transport = HttpsCertTransport('YOUR_KEY_AND_CERT.pem', 'YOUR_KEY_AND_CERT.pem')
     )
 
