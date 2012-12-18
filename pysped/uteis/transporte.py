@@ -5,6 +5,8 @@
 import urllib2
 from suds.client import Client
 from suds.transport.http import HttpTransport, Reply, TransportError
+from OpenSSL import crypto
+import tempfile
 import httplib
 
 class HTTPSCertAuthHandler(urllib2.HTTPSHandler):  
@@ -23,10 +25,28 @@ class HTTPSCertAuthHandler(urllib2.HTTPSHandler):
         return httplib.HTTPSConnection(host, key_file=self.key, cert_file=self.cert)  
 
 class HttpsCertTransport(HttpTransport):
-    def __init__(self, key, cert, *args, **kwargs):
+    def __init__(self, key, cert, password=None, *args, **kwargs):
         HttpTransport.__init__(self, *args, **kwargs)
         self.key = key
         self.cert = cert
+
+        # httplib only accepts PEM, not PFX
+        if self.key.lower().endswith(('pfx', 'p12')) and self.cert == self.key:
+            #Lets get a PEM Key and Cert
+            p12 = crypto.load_pkcs12(file(self.key, 'rb').read(), password)
+            pem_key = crypto.dump_privatekey(crypto.FILETYPE_PEM, p12.get_privatekey())
+            pem_cert = crypto.dump_certificate(crypto.FILETYPE_PEM, p12.get_certificate())
+
+            self.pem_key_file = tempfile.NamedTemporaryFile(suffix='.pem')
+            self.pem_key_file.write(pem_key)
+            self.pem_key_file.flush()
+
+            self.pem_cert_file = tempfile.NamedTemporaryFile(suffix='.pem')
+            self.pem_cert_file.write(pem_cert)
+            self.pem_cert_file.flush()
+
+            self.key = self.pem_key_file.name
+            self.cert = self.pem_cert_file.name
 
     def u2open(self, request):
         """
