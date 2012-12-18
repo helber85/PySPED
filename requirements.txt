@@ -2,5 +2,7 @@ setuptools
 lxml
 suds
 PyOpenSSL==0.12
+## Versao do pyxmlsec com bugfixes para x86_64
+# Motivo: http://bit.ly/R1Twtx
 https://github.com/aricaldeira/pyxmlsec/archive/master.zip
 Geraldo
