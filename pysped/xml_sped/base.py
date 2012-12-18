@@ -661,14 +661,7 @@ def por_acentos(texto):
     return texto
 
 def tira_abertura(texto):
-    aberturas = (u'<?xml version="1.0" encoding="utf-8"?>',
-        u'<?xml version="1.0" encoding="utf-8" ?>',
-        u'<?xml version="1.0" encoding="UTF-8"?>',
-        u'<?xml version="1.0" encoding="UTF-8" ?>')
-
-    for a in aberturas:
-        texto = texto.replace(a,  u'')
-
+    texto = unicode(etree.tostring(etree.fromstring(texto.encode('utf-8'))))
     return texto
 
 def _tipo_para_string(valor, tipo, obrigatorio, dec_min):
