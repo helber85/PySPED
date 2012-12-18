@@ -37,11 +37,11 @@ class HttpsCertTransport(HttpTransport):
             pem_key = crypto.dump_privatekey(crypto.FILETYPE_PEM, p12.get_privatekey())
             pem_cert = crypto.dump_certificate(crypto.FILETYPE_PEM, p12.get_certificate())
 
-            self.pem_key_file = tempfile.NamedTemporaryFile(suffix='.pem')
+            self.pem_key_file = tempfile.NamedTemporaryFile()
             self.pem_key_file.write(pem_key)
             self.pem_key_file.flush()
 
-            self.pem_cert_file = tempfile.NamedTemporaryFile(suffix='.pem')
+            self.pem_cert_file = tempfile.NamedTemporaryFile()
             self.pem_cert_file.write(pem_cert)
             self.pem_cert_file.flush()
 
