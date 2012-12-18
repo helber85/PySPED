@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # arquivo 'certificado_senha.txt' deve conter a senha para o 'certificado.pfx'
     certificado.senha = open(FILE_DIR+'/certificado_senha.txt').read().strip()
     salvar_arquivos = True
-    
+
     cte_xml = open(FILE_DIR+'/xml_teste/000000246.xml', 'r').read()
-    
-    certificado.assina_xmlcte(cte_xml)
+
+    certificado.assina_xml(cte_xml)
