@@ -16,4 +16,6 @@ if __name__ == '__main__':
 
     cte_xml = open(FILE_DIR+'/xml_teste/000000246.xml', 'r').read()
 
-    certificado.assina_xml(cte_xml)
+    xml_assinado = certificado.assina_xml(cte_xml)
+
+    print xml_assinado
