@@ -94,15 +94,15 @@ if __name__ == '__main__':
     )
 
     print c
-    
+
     head_node = c.factory.create('cteCabecMsg')
     head_node.cUF = '35' # São Paulo
     head_node.versaoDados = '1.04'
     c.set_options(soapheaders=[head_node])
-    
+
     response = c.service.cteStatusServicoCT()
     print response
-    
+
     ### Agora comparando a mensagem adquirida com a desejada:
     logging.getLogger('suds.client').setLevel(logging.INFO)
     # A mensagem "desejada" foi copiada da documentação oficial em:
@@ -122,6 +122,6 @@ if __name__ == '__main__':
 </soap12:Envelope>"""
 
     desired_response = c.service.cteStatusServicoCT(__inject={'msg':desired_message})
-    
+
     if response.xMotivo == desired_response.xMotivo:
         print u'\n\nSUCESSO! Resposta idêntica à esperada pela documentação'
