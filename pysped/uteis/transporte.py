@@ -10,6 +10,12 @@ from OpenSSL import crypto
 import tempfile
 import httplib
 
+
+# SOAP server expects a SOAP 1.2 envelope, not a SOAP 1.1 envelope
+# and will complain if this hack isn't done.
+binding.envns = ('soap12', 'http://www.w3.org/2003/05/soap-envelope')
+
+
 class HTTPSCertAuthHandler(urllib2.HTTPSHandler):  
     def __init__(self, key, cert):  
         urllib2.HTTPSHandler.__init__(self)  
@@ -81,10 +87,7 @@ if __name__ == '__main__':
     test_url = 'https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?WSDL'
 
     transport = HttpsCertTransport(key_path, cert_path, password=key_password)
-    
-    # SOAP server expects a SOAP 1.2 envelope, not a SOAP 1.1 envelope
-    # and will complain if this hack isn't done.
-    binding.envns = ('soap12', 'http://www.w3.org/2003/05/soap-envelope')
+
     c = Client(test_url,
         transport=transport,
         prettyxml=True,
