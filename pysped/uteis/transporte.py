@@ -5,6 +5,7 @@
 import urllib2
 from suds.client import Client
 from suds.transport.http import HttpTransport, Reply, TransportError
+from suds.bindings import binding
 from OpenSSL import crypto
 import tempfile
 import httplib
@@ -80,6 +81,10 @@ if __name__ == '__main__':
     test_url = 'https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?WSDL'
 
     transport = HttpsCertTransport(key_path, cert_path, password=key_password)
+    
+    # SOAP server expects a SOAP 1.2 envelope, not a SOAP 1.1 envelope
+    # and will complain if this hack isn't done.
+    binding.envns = ('soap12', 'http://www.w3.org/2003/05/soap-envelope')
     c = Client(test_url,
         transport=transport,
         prettyxml=True,
