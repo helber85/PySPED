@@ -77,7 +77,7 @@ if __name__ == '__main__':
     key_path = os.environ['SPED_KEY_PATH'] # '/path/to/YOUR_KEY_AND_CERT.pem
     key_password = os.environ.get('SPED_KEY_PASSWORD', '') # Senha vazia? Mesmo??
     cert_path = os.environ.get('SPED_CERT_PATH', key_path) # Juntos KEY e CERT?
-    test_url = 'https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx'
+    test_url = 'https://nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?WSDL'
 
     transport = HttpsCertTransport(key_path, cert_path, password=key_password)
     c = Client(test_url,
