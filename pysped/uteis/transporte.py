@@ -97,4 +97,5 @@ if __name__ == '__main__':
     head_node.versaoDados = '1.04'
     c.set_options(soapheaders=[head_node])
     
-    c.service.cteStatusServicoCT()
+    response = c.service.cteStatusServicoCT()
+    print response
