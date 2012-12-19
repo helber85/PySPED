@@ -67,11 +67,11 @@ if __name__ == '__main__':
 
     # These lines enable debug logging; remove them once everything works.
     import logging
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     logging.getLogger('suds.client').setLevel(logging.DEBUG)
     logging.getLogger('suds.transport').setLevel(logging.DEBUG)
-    logging.getLogger('suds.xsd.schema').setLevel(logging.DEBUG)
-    logging.getLogger('suds.wsdl').setLevel(logging.DEBUG)
+    #logging.getLogger('suds.xsd.schema').setLevel(logging.DEBUG)
+    #logging.getLogger('suds.wsdl').setLevel(logging.DEBUG)
 
     import os
     key_path = os.environ['SPED_KEY_PATH'] # '/path/to/YOUR_KEY_AND_CERT.pem
