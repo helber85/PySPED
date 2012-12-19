@@ -99,3 +99,26 @@ if __name__ == '__main__':
     
     response = c.service.cteStatusServicoCT()
     print response
+    
+    ### Agora comparando a mensagem adquirida com a desejada:
+    logging.getLogger('suds.client').setLevel(logging.INFO)
+    # A mensagem "desejada" foi copiada da documentação oficial em:
+    # https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteStatusServico.asmx?op=cteStatusServicoCT
+    desired_message = \
+"""<?xml version="1.0" encoding="utf-8"?>
+<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Header>
+    <cteCabecMsg xmlns="http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico">
+      <cUF>35</cUF>
+      <versaoDados>1.04</versaoDados>
+    </cteCabecMsg>
+  </soap12:Header>
+  <soap12:Body>
+    <cteDadosMsg xmlns="http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico"><!-- xml --></cteDadosMsg>
+  </soap12:Body>
+</soap12:Envelope>"""
+
+    desired_response = c.service.cteStatusServicoCT(__inject={'msg':desired_message})
+    
+    if response.xMotivo == desired_response.xMotivo:
+        print u'\n\nSUCESSO! Resposta idêntica à esperada pela documentação'
