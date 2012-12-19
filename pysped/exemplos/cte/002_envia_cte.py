@@ -31,6 +31,10 @@ if __name__ == '__main__':
     )
     print c
     
-    resultado = c.service.cteRecepcao(cte_xml)
-    print resultado
+    head_node = c.factory.create('cteCabecMsg')
+    head_node.cUF = '35' # São Paulo
+    head_node.versaoDados = '1.04'
+    c.set_options(soapheaders=[head_node])
     
+    resultado = c.service.cteRecepcaoLote(xml_assinado)
+    print resultado
