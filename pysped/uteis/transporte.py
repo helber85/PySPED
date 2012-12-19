@@ -69,7 +69,7 @@ if __name__ == '__main__':
     import logging
     logging.basicConfig(level=logging.INFO)
     logging.getLogger('suds.client').setLevel(logging.DEBUG)
-    logging.getLogger('suds.transport').setLevel(logging.DEBUG)
+    #logging.getLogger('suds.transport').setLevel(logging.DEBUG)
     #logging.getLogger('suds.xsd.schema').setLevel(logging.DEBUG)
     #logging.getLogger('suds.wsdl').setLevel(logging.DEBUG)
 
