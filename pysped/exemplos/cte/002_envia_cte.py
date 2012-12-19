@@ -4,6 +4,7 @@ from datetime import datetime
 from os.path import abspath, dirname
 from pysped.xml_sped.certificado import Certificado
 from pysped.uteis import transporte
+from pysped.uteis.transporte import Client as SoapClient
 
 FILE_DIR = abspath(dirname(__file__))
 
@@ -24,10 +25,11 @@ if __name__ == '__main__':
                                                    caminho_certificado,
                                                    password=senha_certificado)
 
-    c = Client(test_url,
-        transport=transport,
+    c = SoapClient(test_url,
+        transport=socket_factory,
         prettyxml=True,
     )
+    print c
     
     resultado = c.service.cteRecepcao(cte_xml)
     print resultado
