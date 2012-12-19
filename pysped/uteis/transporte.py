@@ -92,4 +92,9 @@ if __name__ == '__main__':
 
     print c
     
+    head_node = c.factory.create('cteCabecMsg')
+    head_node.cUF = '35' # São Paulo
+    head_node.versaoDados = '1.04'
+    c.set_options(soapheaders=[head_node])
+    
     c.service.cteStatusServicoCT()
