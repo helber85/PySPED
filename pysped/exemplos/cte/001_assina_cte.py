@@ -17,3 +17,6 @@ if __name__ == '__main__':
     xml_assinado = certificado.assina_xml(cte_xml)
 
     print xml_assinado
+
+    # Para uso posterior
+    arquivo_assinado = open(FILE_DIR+'/xml_teste/000000246_assinado.xml', 'w').write(xml_assinado)
