@@ -58,3 +58,4 @@ if __name__ == '__main__':
     #logging.getLogger('pysped.uteis.validacao').setLevel(logging.DEBUG)
     
     #res = validar(n.xml, n.caminho_esquema+n.arquivo_esquema)
+    pass
