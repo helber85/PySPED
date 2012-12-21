@@ -6,29 +6,6 @@ from distutils.core import setup
 
 import re
 
-def parse_requirements(file_name):
-    requirements = []
-    for line in open(file_name, 'r').read().split('\n'):
-        if re.match(r'(\s*#)|(\s*$)', line):
-            continue
-        if re.match(r'\s*-e\s+', line):
-            requirements.append(re.sub(r'\s*-e\s+.*#egg=(.*)$', r'\1', line))
-        elif re.match(r'\s*-f\s+', line):
-            pass
-        else:
-            requirements.append(line)
-
-    return requirements
-
-def parse_dependency_links(file_name):
-    dependency_links = []
-    for line in open(file_name, 'r').read().split('\n'):
-        if re.match(r'\s*-[ef]\s+', line):
-            dependency_links.append(re.sub(r'\s*-[ef]\s+', '', line))
-
-    return dependency_links
-
-
 setup(
     name = u'PySPED',
     version = '0.1dev_alanjds_branch',
@@ -46,6 +23,15 @@ setup(
                                         os.path.join(u'cadeia-certificadora', u'certificados', u'*')]},
     include_package_data=True,
     zip_safe = False,
-    dependency_links = ['https://github.com/joaoalf/geraldo/tarball/master#egg=Geraldo-0.4dev_joaoalf_branch'],
-    install_requires= parse_requirements('requirements.txt'),
+    dependency_links = [
+        'https://github.com/joaoalf/geraldo/tarball/master#egg=Geraldo-0.4dev_joaoalf_branch',
+        'https://github.com/aricaldeira/pyxmlsec/archive/master.zip#egg=pyxmlsec',
+    ],
+    install_requires = [
+        'setuptools',
+        'lxml',
+        'suds',
+        'PyOpenSSL==0.12',
+        'Geraldo',
+    ],
 )
